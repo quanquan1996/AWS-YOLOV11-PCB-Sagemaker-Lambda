@@ -1,0 +1,10 @@
+This is a placeholder file. Replace this with an actual PCB image for testing.
+
+To use this test script:
+1. Place a PCB image in the current directory and name it "test_image.jpg"
+2. Or set the TEST_IMAGE_PATH environment variable to point to your test image
+3. Run the test.py script
+
+Example:
+export TEST_IMAGE_PATH=/path/to/your/pcb_image.jpg
+python test.py
