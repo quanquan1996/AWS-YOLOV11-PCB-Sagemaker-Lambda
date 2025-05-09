@@ -16,20 +16,23 @@ def read_file_as_base64(file_path):
 
 def test_image():
     """测试图像处理功能"""
-    # 图像路径 - 替换为你的测试图像路径
-    image_path = "C:/Users/Administrator/Pictures/33-1543149x27_hanspub.png"  # 修改为你的测试图像路径
+    # 图像路径 - 使用相对路径或环境变量
+    image_path = os.environ.get("TEST_IMAGE_PATH", "test_image.jpg")  # 默认使用当前目录下的test_image.jpg
 
     print(f"Testing image processing with: {image_path}")
+
+    # 检查文件是否存在
+    if not os.path.exists(image_path):
+        print(f"Warning: Test image not found at {image_path}. Please provide a valid image path.")
+        return
 
     # 读取图像文件并转换为 base64
     image_data = read_file_as_base64(image_path)
 
     # 构造模拟的 Lambda 事件
     event = {
-        'body': json.dumps({
-            'file_type': 'image',
-            'file_data': image_data
-        })
+        'file_type': 'image',
+        'file_data': image_data
     }
 
     # 调用 Lambda 处理函数
@@ -55,20 +58,23 @@ def test_image():
 
 def test_video():
     """测试视频处理功能"""
-    # 视频路径 - 替换为你的测试视频路径
-    video_path = "test_video.mp4"  # 修改为你的测试视频路径
+    # 视频路径 - 使用相对路径或环境变量
+    video_path = os.environ.get("TEST_VIDEO_PATH", "test_video.mp4")  # 默认使用当前目录下的test_video.mp4
 
     print(f"Testing video processing with: {video_path}")
+
+    # 检查文件是否存在
+    if not os.path.exists(video_path):
+        print(f"Warning: Test video not found at {video_path}. Please provide a valid video path.")
+        return
 
     # 读取视频文件并转换为 base64
     video_data = read_file_as_base64(video_path)
 
     # 构造模拟的 Lambda 事件
     event = {
-        'body': json.dumps({
-            'file_type': 'video',
-            'file_data': video_data
-        })
+        'file_type': 'video',
+        'file_data': video_data
     }
 
     # 调用 Lambda 处理函数

@@ -13,7 +13,7 @@ RUN pip install -r requirements.txt --no-cache-dir
 
 # 创建模型目录并复制模型文件
 RUN mkdir -p ${LAMBDA_TASK_ROOT}/models
-COPY models/best.pt ${LAMBDA_TASK_ROOT}/models/
+COPY models/bestv11.pt ${LAMBDA_TASK_ROOT}/models/
 
 # 复制Lambda函数代码
 COPY lambda_function.py ${LAMBDA_TASK_ROOT}

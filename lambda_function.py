@@ -30,8 +30,8 @@ def process_image(image_data):
     # 转换为PIL图像
     img = Image.open(io.BytesIO(image_bytes))
 
-    # 预测
-    results = model.predict(img)
+    # 预测 - 使用较低的置信度阈值以提高检测灵敏度
+    results = model.predict(img, conf=0.3)  # 添加较低的置信度阈值
 
     # 处理结果
     boxes = results[0].boxes
@@ -83,9 +83,6 @@ def process_video(video_data):
     temp_file = tempfile.NamedTemporaryFile(delete=False, suffix='.mp4')
     temp_file.write(video_bytes)
     temp_file.close()
-
-    # 加载模型
-    model = YOLO(MODEL_LOCAL_PATH)
 
     # 打开视频
     cap = cv2.VideoCapture(temp_file.name)
